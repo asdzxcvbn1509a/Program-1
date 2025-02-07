@@ -6,6 +6,7 @@
 using namespace std;
 
 int main() {
+    cout << "Set Union" << endl;
     set<int> a, b, unionset;
     int n, value;
     
