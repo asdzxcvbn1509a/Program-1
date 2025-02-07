@@ -2,6 +2,7 @@
 
 using namespace std;
 int main() {
+    cout << "Factorial" << endl;
     int a, b=1;
     cout << "Enter the number of factorial : ";
     cin >> a;
