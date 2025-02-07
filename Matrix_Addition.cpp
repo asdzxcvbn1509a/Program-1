@@ -2,6 +2,7 @@
 using namespace std;
 
 int main() {
+    cout << "Matrix Addition" << endl;
     int m, n;
     cout << "Enter the area of matrix : ";
     cin >> m >> n;
