@@ -1,118 +1,132 @@
 #include <iostream>
 #include <set>
+#include <vector>
 #include <algorithm>
-#include <iterator>
+
 using namespace std;
 
 void Matrix_Addition() {
     cout << "Matrix Addition" << endl;
+    
     int m, n;
-    cout << "Enter the area of matrix : ";
+    cout << "Enter the size of the matrix (rows cols): ";
     cin >> m >> n;
-    cout << endl << "Emter the number of frist matrix" << endl;
-    int first[m][n], second[m][n];
-    for (int i=0; i<m; i++) {
-        for (int j=0; j<n; j++) {
+
+    vector<vector<int>> first(m, vector<int>(n));
+    vector<vector<int>> second(m, vector<int>(n));
+
+    cout << "Enter the elements of the first matrix:\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             cin >> first[i][j];
         }
     }
-    cout << endl << "Enter the number of second matrix :" << endl;
-    for (int i=0; i<m; i++) {
-        for (int j=0; j<n; j++) {
+
+    cout << "Enter the elements of the second matrix:\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             cin >> second[i][j];
         }
     }
-    cout << endl << "The addition of both matrix = " << endl;
-    for (int i=0; i<m; i++) {
+
+    cout << "The addition of both matrices:\n";
+    for (int i = 0; i < m; i++) {
         cout << "| ";
-        for (int j=0; j<n; j++) {
+        for (int j = 0; j < n; j++) {
             cout << first[i][j] + second[i][j] << " ";
         }
-        cout << "|" ;
-        cout << "\n";
+        cout << "|\n";
     }
 }
 
 void Dot_Product() {
-    cout << "Dot product" << endl;
-    int a, d=0;
-    cout << "Enter the number of element of set : ";
-    cin >> a;
-    int b[a], c[a];
-    cout << "Enter the members of first set   : ";
-    for (int i=0; i<a; i++) {
-        cin >> b[i];
+    cout << "Dot Product\n";
+
+    int size;
+    cout << "Enter the number of elements in the set: ";
+    cin >> size;
+
+    vector<int> b(size), c(size);
+    cout << "Enter the members of the first set: ";
+    for (int& num : b) cin >> num;
+
+    cout << "Enter the members of the second set: ";
+    for (int& num : c) cin >> num;
+
+    int dot_product = 0;
+    for (size_t i = 0; i < size; i++) {
+        dot_product += b[i] * c[i];
     }
-    cout << "Enter the memebers of second set : ";
-    for (int i=0; i<a; i++) {
-        cin >> c[i];
-    }
-    for (int i=0; i<a; i++) {
-        d += b[i]*c[i];
-    }
-    cout << "The dot product = ";
-    cout << d;
+
+    cout << "The dot product = " << dot_product << endl;
 }
+
 void Factorial() {
-    cout << "Factorial" << endl;
-    int a, b=1;
-    cout << "Enter the number of factorial : ";
-    cin >> a;
-    for (int i=a; i>0; --i) {
-        b = b*i;
+    cout << "Factorial\n";
+
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    long long factorial = 1;
+    for (int i = 2; i <= num; i++) {
+        factorial *= i;
     }
-    cout << "The factorial = " << b;
+
+    cout << "Factorial of " << num << " = " << factorial << endl;
 }
+
 void Set_Union() {
-    cout << "Set Union" << endl;
+    cout << "Set Union\n";
+
     set<int> a, b, unionset;
     int n, value;
-    cout << "Enter the number of elements of set A : ";
+
+    cout << "Enter the number of elements in set A: ";
     cin >> n;
-    cout << "Enter the members of set A : ";
-    for (int i=0; i<n; i++) {
+    cout << "Enter the elements of set A: ";
+    for (int i = 0; i < n; i++) {
         cin >> value;
         a.insert(value);
     }
-    cout << "Enter the number of elements of set B : ";
+
+    cout << "Enter the number of elements in set B: ";
     cin >> n;
-    cout << "Enter the members of set B : ";
-    for (int i=0; i<n; i++) {
+    cout << "Enter the elements of set B: ";
+    for (int i = 0; i < n; i++) {
         cin >> value;
         b.insert(value);
     }
+
     set_union(a.begin(), a.end(), b.begin(), b.end(), inserter(unionset, unionset.begin()));
+
     cout << "A ∪ B = { ";
-    int count=0;
-    for (int v : unionset) {
+    size_t count = 0;
+    for (const int& v : unionset) {
         cout << v;
-        if (++count < unionset.size()) {
-            cout << ", ";
-        }
+        if (++count < unionset.size()) cout << ", ";
     }
-    cout << " }";
+    cout << " }\n";
 }
 
 int main() {
-    cout << "1 = Matrix_Addition" << endl;
-    cout << "2 = Dot_Product" << endl;
-    cout << "3 = Factorial" << endl;
-    cout << "4 = Set_Union" << endl;
-    cout << "Enter the number : ";
-    int a;
-    cin >> a;
+    cout << "1 = Matrix Addition\n";
+    cout << "2 = Dot Product\n";
+    cout << "3 = Factorial\n";
+    cout << "4 = Set Union\n";
+    cout << "Enter the number: ";
+
+    int choice;
+    cin >> choice;
     cout << endl;
-    if (a==1) {
-        Matrix_Addition();
+
+    switch (choice) {
+        case 1: Matrix_Addition(); break;
+        case 2: Dot_Product(); break;
+        case 3: Factorial(); break;
+        case 4: Set_Union(); break;
+        default: cout << "Invalid choice!\n";
     }
-    if (a==2) {
-        Dot_Product();
-    }
-    if (a==3) {
-        Factorial();
-    }
-    if (a==4) {
-        Set_Union();
-    }
+
     return 0;
 }
